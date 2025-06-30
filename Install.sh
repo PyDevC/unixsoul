@@ -41,3 +41,10 @@ log(){
     fi
     printf "$1\n" >> $CURRLOGFILE
 }
+
+addEnvToRcfiles(){
+    # Adding environment variables to source files such as bashrc, or zshrc
+    # read the json file envar_list.json
+    # TODO: think about it later (before first release)
+    echo "not implemented yet"
+}
