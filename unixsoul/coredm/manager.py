@@ -2,6 +2,7 @@ import os
 import sys
 import subprocess
 from typing import List
+import socket
 
 class BaseManager:
     pass
@@ -9,6 +10,15 @@ class BaseManager:
 class HyprlandManager(BaseManager):
     def __init__(self):
         self.CONTROLLER = "hyprctl"
+
+        # Change the name later into something relevant
+        # The manageunits just keep record of what things is has access to like
+        # services and where to look in order to invoke the service
+        self.manageunits = {
+            "window_manager": "hyprland",
+            "services": [] ## will add the services later Do note that this 
+                           ## whole things is temporary and can be removed if a method of doing this is found
+        }
 
     def invokecmd(self, command):
         # NOTE: why use this much functions when we can just invoke directly?
@@ -47,14 +57,18 @@ class HyprlandManager(BaseManager):
             "setprop":self._setprop,
             "splash":self._splash,
             "switchxkblayout":self._switchxkblayout,
-            "systeminfo":self._systeminfo,
-            "version":self._version,
             "workspacerules":self._workspacerules,
             "workspaces":self._workspaces,
         }
 
         cmdtype = command[0]
-        CMDTYPES[command[0]](command[1:])
+        if command[0] == self.CONTROLLER:
+            #CMDTYPES[command[0]](command[1:])
+            #for now we are running the commands directly
+            output = subprocess.run(command, capture_output=True)
+            if output.stdout:
+                print(output.stdout)
+
 
     def _activewindow(self, *args):
         pass
