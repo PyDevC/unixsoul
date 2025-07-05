@@ -14,6 +14,20 @@ LOGDIR=$HOME/.unixsoul/logs/installation # WE ARE GOING TO CREATE A CALANDER BAS
 LOGGEN=0
 CURRLOGFILE=""
 
+checkPackageManager(){
+    if [[ ! -z "$(which apt)" ]]; then
+        echo "apt"
+    elif [[ ! -z "$(which dnf)" ]]; then
+        echo "dnf"
+    elif [[ ! -z "$(which pacman)" ]]; then
+        echo "pacman"
+    else
+        echo "None"
+    fi
+}
+
+PAC="$(checkPackageManager)"
+
 timestamp(){
     local stamp
     if [[ $1 == "logfile" ]]; then
@@ -42,21 +56,19 @@ log(){
     printf "$1\n" >> $CURRLOGFILE
 }
 
+readENVARLIST(){
+    if [[ -z "$(which jq)" ]]; then
+        sudo $PAC install jq
+    fi
+    out="$(cat ./envarlist.json | jq -r ".$1.$2")"
+    # Never make more than two nesting you can also do $2=".Inner.inner2" to go deeper in the json
+
+    echo $out
+}
+
 addEnvToRcfiles(){
     # Adding environment variables to source files such as bashrc, or zshrc
     # read the json file envar_list.json
     # TODO: think about it later (before first release)
     echo "not implemented yet"
-}
-
-checkPackageManager(){
-    if [[ ! -z "$(which apt)" ]]; then
-        echo "apt"
-    elif [[ ! -z "$(which dnf)" ]]; then
-        echo "dnf"
-    elif [[ ! -z "$(which pacman)" ]]; then
-        echo "pacman"
-    else
-        echo "None"
-    fi
 }
