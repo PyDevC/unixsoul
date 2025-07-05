@@ -48,3 +48,15 @@ addEnvToRcfiles(){
     # TODO: think about it later (before first release)
     echo "not implemented yet"
 }
+
+checkPackageManager(){
+    if [[ ! -z "$(which apt)" ]]; then
+        echo "apt"
+    elif [[ ! -z "$(which dnf)" ]]; then
+        echo "dnf"
+    elif [[ ! -z "$(which pacman)" ]]; then
+        echo "pacman"
+    else
+        echo "None"
+    fi
+}
