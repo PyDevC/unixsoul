@@ -1,6 +1,10 @@
 {
     "DEFAULT": {
-        "UNIXSOUL": "$HOME/.unixsoul"
+        "UNIXSOUL": "$HOME/.unixsoul",
+        "CONFIG": [
+            "$HOME/.config",
+            "$HOME/.unixsoul/config"
+        ]
     },
-    "CUSTOM": {}
+    "Installed": {}
 }
