@@ -56,7 +56,7 @@ log(){
     printf "$1\n" >> $CURRLOGFILE
 }
 
-readENVARLIST(){
+readEnvarlist(){
     if [[ -z "$(which jq)" ]]; then
         sudo $PAC install jq
     fi
@@ -64,11 +64,4 @@ readENVARLIST(){
     # Never make more than two nesting you can also do $2=".Inner.inner2" to go deeper in the json
 
     echo $out
-}
-
-addEnvToRcfiles(){
-    # Adding environment variables to source files such as bashrc, or zshrc
-    # read the json file envar_list.json
-    # TODO: think about it later (before first release)
-    echo "not implemented yet"
 }
