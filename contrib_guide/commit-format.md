@@ -24,8 +24,6 @@ Unixsoul hyprland seems to break for multiple monitors due to issue as described
 in (# issue id), quick fix is to ... (write your solution, length of the commit depends on the pull request description)
 
 Resolves issue: (# 123132)
-author: PyDevC (Anushk Sharma) <pydevc@proton.me>
-
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
 ```
