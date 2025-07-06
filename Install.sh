@@ -55,7 +55,7 @@ log(){
         cd $LOGDIR
         logname="$(timestamp "logfile").log"
         # Check if the file already exists
-        if [[ ! -d "$CURRLOGFILE/$logname" ]]; then
+        if [[ -f "$LOGDIR/$logname" ]]; then
             logname="$(timestamp "duplicate").log"
         fi
         touch $logname
