@@ -15,6 +15,13 @@ LOGGEN=0
 CURRLOGFILE=""
 
 checkPackageManager(){
+    # This is to be used to update envarlist.json .PACKAGE_MANAGER entry,
+    # this funciton is ought to be called only once, which is when first time
+    # installing the script, do not run it in any other case
+    # Returns package manager that is available
+    # If returns None then abort the installation and tell user that no compatible
+    # package manager found
+    
     if [[ ! -z "$(which apt)" ]]; then
         echo "apt"
     elif [[ ! -z "$(which dnf)" ]]; then
@@ -25,8 +32,6 @@ checkPackageManager(){
         echo "None"
     fi
 }
-
-PAC="$(checkPackageManager)"
 
 timestamp(){
     local stamp
@@ -41,6 +46,9 @@ timestamp(){
 }
 
 log(){
+    # usage:
+    # log "this is log example"
+    
     if [[ -z $CURRLOGFILE ]]; then
         local logname
         mkdir -p $LOGDIR
@@ -56,12 +64,15 @@ log(){
     printf "$1\n" >> $CURRLOGFILE
 }
 
-readEnvarlist(){
+queryEnvarlist(){
+    # usage:
+    # queryEnvarlist ".DEFAULT.UNIXSOUL"
+    # output: $HOME/.unixsoul
+    
     if [[ -z "$(which jq)" ]]; then
         sudo $PAC install jq
     fi
-    out="$(cat ./envarlist.json | jq -r ".$1.$2")"
-    # Never make more than two nesting you can also do $2=".Inner.inner2" to go deeper in the json
+    out="$(cat ./envarlist.json | jq -r "$1")"
 
     echo $out
 }
