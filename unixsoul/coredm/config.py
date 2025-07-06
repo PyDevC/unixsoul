@@ -1,4 +1,32 @@
-class ConfigGen:
+class BaseConfigGen:
+    def __init__(self):
+        self.conf = dict()
+
+    def generate(self):
+        """generate the config
+
+        Ex:
+            # [ monitor ]
+            monitor=,preferred, auto, 2.0
+            monitor=,preferred, auto, auto
+        """
+        configurationfile = "" # only use normal string (do not use f-string)
+
+        for node in self.conf.keys():
+            comment = self._add_comment(node)
+            configurationfile += comment
+            for config in self.conf[node]:
+                configurationfile += config + "\n"
+        return configurationfile
+
+    def _add_comment(self, node):
+        return "\n# [ " + node + " ]\n"
+
+
+class WaybarConfigGen(BaseConfigGen):
+    pass
+
+class HyprConfigGen(BaseConfigGen):
     """
     Manages and generated the config
 

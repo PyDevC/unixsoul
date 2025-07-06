@@ -3,6 +3,7 @@ import sys
 import subprocess
 from typing import List
 import socket
+import json
 
 class BaseManager:
     pass
@@ -20,7 +21,9 @@ class HyprlandManager(BaseManager):
                            ## whole things is temporary and can be removed if a method of doing this is found
         }
 
-    def invokecmd(self, command):
+    def invoke_hyprcmd(self, command):
+        """invoke commands
+        """
         # NOTE: why use this much functions when we can just invoke directly?
         # its cause we need to invoke other services
         # also there are high chances that the functions will change in order
@@ -69,6 +72,15 @@ class HyprlandManager(BaseManager):
             if output.stdout:
                 print(output.stdout)
 
+
+    def runscript(self, script):
+        """only run the scripts whose output can be ommited
+        """
+        script_path = "script/" + script + ".sh"
+        subprocess.run(script_path)
+
+    def _update_config(self):
+        pass
 
     def _activewindow(self, *args):
         pass
