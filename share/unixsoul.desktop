@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Unix-Soul(Hyprland)
+Comment=Soul of Unix with touch of Land of Chaos
+Exec=Hyprland
+Type=Application
+DesktopNames=Unix-Soul(Hyprland)
+Keywords=tiling;wayland;compositor;

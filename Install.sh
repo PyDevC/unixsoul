@@ -76,3 +76,10 @@ queryEnvarlist(){
 
     echo $out
 }
+
+waylandSessionEntry(){
+    UNIXSOUL=pwd
+    cp $UNIXSOUL/share/unixsoul.desktop /usr/share/wayland-sessions
+}
+
+waylandSessionEntry
